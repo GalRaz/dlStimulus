@@ -195,7 +195,7 @@ def DakinModel(number=0,density=0,area=0):
 
     #kernel size and grid for values 
     hi_s=0.2
-    low_s=1.4
+    low_s=1.2
     a=arange(-floor(low_s*4.5),ceil(low_s*4.5)+0.1,0.1)
     [X,Y] = meshgrid(a,a);
    
@@ -231,13 +231,13 @@ def DakinModel(number=0,density=0,area=0):
     ax.axis('off')
 
     #Response ratio
-    resratio_A=sum(highpass_A)/sum(lowpass_A)*float(random.normal(1,0.05,1)) #smaller random noise for consistency
-    resratio_B=sum(highpass_B)/sum(lowpass_B)*float(random.normal(1,0.05,1)) 
+    resratio_A=sum(highpass_A)/sum(lowpass_A)*float(random.normal(1,0.01,1)) #smaller random noise for now
+    resratio_B=sum(highpass_B)/sum(lowpass_B)*float(random.normal(1,0.01,1)) 
     
     print("")
     #relative density estimate
     estimated_density=resratio_A/resratio_B
-    print("relative density estimate =",rel_estimated_density)    
+    print("relative density estimate =",estimated_density)    
 
     if estimated_density>1:
         print("Model says A is more dense")
@@ -247,7 +247,7 @@ def DakinModel(number=0,density=0,area=0):
     print("")
     
     #relative numerosity estimate
-    estimated_numerosity=(float(random.normal(1,0.05,1))*sum(lowpass_A)/sum(lowpass_B))**random.normal(1,1.9,1)*estimated_density
+    estimated_numerosity=(float(random.normal(1,0.05,1))*sum(lowpass_A)/sum(lowpass_B))**float(random.normal(1,1.9,1))*estimated_density
     print("relative numerosity estimate =",estimated_numerosity)
  
     if estimated_numerosity>1:
